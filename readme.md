@@ -1,14 +1,15 @@
-# Matching
+# match
 
-Various matching algorithms.
+Graph matching algorithms.
 
-## Stable Marriage
+## stable-marriage
 
-Solutions to the stable marriage problem.
+The typical Gale-Shapely algorithm.
 
 > Given a bipartite graph and a preference list for each node, return a list of bipartite pairs such that all nodes are matched.
 
-Contraints:
+Constraints:
 
 - The bipartite graph has an equal number of nodes.
 - Each preference list is complete, that is, contains a full list of nodes in the other graph.
+

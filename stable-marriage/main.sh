@@ -1,1 +1,1 @@
-python -m galeshapely.main
+ant compile && java -cp classes heirat.Main

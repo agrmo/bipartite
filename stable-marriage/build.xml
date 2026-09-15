@@ -1,0 +1,11 @@
+<project>
+
+  <target name="compile">
+    <mkdir dir="classes"/>
+
+    <javac srcdir="src"
+	   destdir="classes"
+	   includeantruntime="false"/>
+  </target>
+
+</project>

@@ -176,7 +176,7 @@ public class Heirat {
 	// Die Stelle, an der der Mann mzwei steht.
 	int mzweiStelle = Liste.index(this.frauVorliebe.get(frau), mzwei);
 
-	System.out.println("m1, m2: " + meinsStelle + " " + mzweiStelle);
+	// System.out.println("m1, m2: " + meinsStelle + " " + mzweiStelle);
 	
 	return meinsStelle < mzweiStelle;    
     }
@@ -198,24 +198,24 @@ public class Heirat {
 
 	    int mann = this.mannNichtAlleVorgeschlagen();
 	    int frau = this.nehmeBeliebteste(mann);
-	    System.out.println("Vorschlagen Mann " + mann + " und Frau " + frau);
+	    // System.out.println("Vorschlagen Mann " + mann + " und Frau " + frau);
 
 	    if (this.istFreiFrau(frau)) {
 		// Die Frau ist frei. Mache ein Paar.
-		System.out.println("Die Frau " + frau + " ist frei.");
+		// System.out.println("Die Frau " + frau + " ist frei.");
 		this.verlobung.add(new Integer[] {mann, frau});
 		
 	    } else {
-		System.out.println("Die Frau " + frau + " ist nicht frei.");
+		// System.out.println("Die Frau " + frau + " ist nicht frei.");
 		
 		// Nehme den Mann, mit ihm sie in einem Paar schon steht.
 		int mannInPaar = this.nehmeMannVonFrau(frau);
-		System.out.println("Der Mann, mit ihm sie in einem Paar schon steht ist " + mannInPaar);
+		// System.out.println("Der Mann, mit ihm sie in einem Paar schon steht ist " + mannInPaar);
 
 		// Steht der Mann höher als der Mann im Paar?
 		// Falls ja, tauchen die Männer.
 		if (this.stehtHoeher(frau, mann, mannInPaar)) {
-		    System.out.println("Der Mann " + mann + " steht höher. Tauschen.");
+		    // System.out.println("Der Mann " + mann + " steht höher. Tauschen.");
 		    this.tauschen(frau, mann);
 		}
 	    }
@@ -224,7 +224,7 @@ public class Heirat {
 	    // Addiere sie zu die Frauen, die er schon vorgeschlagen hat.
 	    this.vorschlaege.get(mann).add(frau);
 
-	    System.out.println("Vorschlag fertig. Vorschlag ist " + vorschlaege);
+	    // System.out.println("Vorschlag fertig. Vorschlag ist " + vorschlaege);
 	}
 	
 	return this.verlobung;

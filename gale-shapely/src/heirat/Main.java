@@ -9,8 +9,8 @@ import druck.liste.Listedrucker;
 // heirat.Main
 
 public class Main {
-    public static void main(String[] args) {
-	
+
+    static void beispieleins() {
 	// Es gibt 3 Männer: 0,1,2
 	// 0 liebt vor: 3,5,4
 	// 1 liebt vor: 3,4,5
@@ -38,5 +38,13 @@ public class Main {
 	    System.out.print("Schritt fertig. Verlobung ist ");
 	    System.out.println(Listedrucker.druckeprimitiv(verlobung));
 	}
+    }
+
+    static void beispielzwei() {
+	VorliebeZufall.mache(10);
+    }
+
+    public static void main(String[] args) {
+	beispielzwei();
     }
 }

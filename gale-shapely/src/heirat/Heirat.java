@@ -24,18 +24,18 @@ import java.util.HashSet;
 
 public class Heirat {
     
-    public Map<Integer,List<Integer>> mannVorliebe;
-    public Map<Integer,List<Integer>> frauVorliebe;
-    public Map<Integer,Set<Integer>> vorschlaege;
-    public List<List<Integer>> verlobung;
+    public HashMap<Integer,List<Integer>> mannVorliebe;
+    public HashMap<Integer,List<Integer>> frauVorliebe;
+    public HashMap<Integer,HashSet<Integer>> vorschlaege;
+    public ArrayList<List<Integer>> verlobung;
     
-    public Heirat(Map<Integer,List<Integer>> m,
-		  Map<Integer,List<Integer>> f) {
-	mannVorliebe = m;
-	frauVorliebe = f;
+    public Heirat(HashMap<Integer,List<Integer>> m,
+		  HashMap<Integer,List<Integer>> f) {
 
+	this.mannVorliebe = m;
+	this.frauVorliebe = f;
 	this.verlobung = new ArrayList<List<Integer>>();
-	this.vorschlaege = new HashMap<Integer,Set<Integer>>();
+	this.vorschlaege = new HashMap<Integer,HashSet<Integer>>();
     }
 
     // Ist der Mann frei?
@@ -214,9 +214,8 @@ public class Heirat {
 
 	    // Der Mann ist fertig, um einen Antrag mit dieser Frau vorzuschlagen.
 	    // Addiere sie zu die Frauen, die er schon vorgeschlagen hat.
-	    Set<Integer> frauVorschlaege = vorschlaege.get(mann);
+	    HashSet<Integer> frauVorschlaege = vorschlaege.get(mann);
 	    frauVorschlaege.add(frau);
-	    vorschlaege.put(mann, frauVorschlaege);
 
 	    System.out.println("Verlobung ist " + verlobung);
 	    System.out.println("Vorschlag fertig. Vorschlag ist " + vorschlaege);

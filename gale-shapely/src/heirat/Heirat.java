@@ -24,10 +24,10 @@ import java.util.HashSet;
 
 public class Heirat {
     
-    Map<Integer,List<Integer>> mannVorliebe;
-    Map<Integer,List<Integer>> frauVorliebe;
-    Map<Integer,Set<Integer>> vorschlaege;
-    List<List<Integer>> verlobung;
+    public Map<Integer,List<Integer>> mannVorliebe;
+    public Map<Integer,List<Integer>> frauVorliebe;
+    public Map<Integer,Set<Integer>> vorschlaege;
+    public List<List<Integer>> verlobung;
     
     public Heirat(Map<Integer,List<Integer>> m,
 		  Map<Integer,List<Integer>> f) {

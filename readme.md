@@ -2,7 +2,7 @@
 
 Matching algorithms.
 
-## stable-marriage
+## gale-shapely
 
 The typical Gale-Shapely algorithm.
 

@@ -3,6 +3,8 @@ package heirat;
 import java.util.HashMap;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
+import druck.liste.Listedrucker;
 
 // heirat.Main
 
@@ -18,22 +20,23 @@ public class Main {
 	// 1 liebt vor: 1,2,0
 	// 2 liebt vor: 1,2,0
 	// Eine stabile Verlobung ist [[1, 3], [2, 5], [0, 4]]
-	
-	HashMap<Integer,List<Integer>> mannVorliebe = new HashMap<Integer,List<Integer>>();
-	mannVorliebe.put(0,Arrays.asList(3,5,4));
-	mannVorliebe.put(1,Arrays.asList(3,4,5));
-	mannVorliebe.put(2,Arrays.asList(5,4,3));
 
-	HashMap<Integer,List<Integer>> frauVorliebe = new HashMap<Integer,List<Integer>>();
-	frauVorliebe.put(3,Arrays.asList(2,1,0));
-	frauVorliebe.put(4,Arrays.asList(1,2,0));
-	frauVorliebe.put(5,Arrays.asList(1,2,0));
+	HashMap<Integer,Integer[]> mannVorliebe = new HashMap<Integer,Integer[]>();
+	mannVorliebe.put(0,new Integer[] {3,5,4});
+	mannVorliebe.put(1,new Integer[] {3,4,5});
+	mannVorliebe.put(2,new Integer[] {5,4,3});
+
+	HashMap<Integer,Integer[]> frauVorliebe = new HashMap<Integer,Integer[]>();
+	frauVorliebe.put(3,new Integer[] {2,1,0});
+	frauVorliebe.put(4,new Integer[] {1,2,0});
+	frauVorliebe.put(5,new Integer[] {1,2,0});
 
 	Heirat h = new Heirat(mannVorliebe, frauVorliebe);
 
 	while (h.nichtAlleVorgeschlagen()) {
-	    List<List<Integer>> verlobung = h.schritt();
-	    System.out.println(verlobung);
+	    ArrayList<Integer[]> verlobung = h.schritt();
+	    System.out.print("Schritt fertig. Verlobung ist ");
+	    System.out.println(Listedrucker.druckeprimitiv(verlobung));
 	}
     }
 }

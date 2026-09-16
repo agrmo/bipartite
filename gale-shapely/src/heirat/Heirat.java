@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import liste.Liste;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,13 +26,13 @@ import java.util.Set;
 public class Heirat {
     
     public int groesse;
-    public HashMap<Integer,List<Integer>> mannVorliebe;
-    public HashMap<Integer,List<Integer>> frauVorliebe;
+    public HashMap<Integer,Integer[]> mannVorliebe;
+    public HashMap<Integer,Integer[]> frauVorliebe;
     public HashMap<Integer,HashSet<Integer>> vorschlaege;
-    public ArrayList<List<Integer>> verlobung;
+    public ArrayList<Integer[]> verlobung;
     
-    public Heirat(HashMap<Integer,List<Integer>> m,
-		  HashMap<Integer,List<Integer>> f) {
+    public Heirat(HashMap<Integer,Integer[]> m,
+		  HashMap<Integer,Integer[]> f) {
 
 	if (m.size() != f.size()) {
 	    System.out.println("Problem");
@@ -40,14 +41,14 @@ public class Heirat {
 	this.groesse = m.size();
 	this.mannVorliebe = m;
 	this.frauVorliebe = f;
-	this.verlobung = new ArrayList<List<Integer>>();
+	this.verlobung = new ArrayList<Integer[]>();
 	this.vorschlaege = new HashMap<Integer,HashSet<Integer>>();
     }
 
     // Ist der Mann frei?
     boolean istFreiMann(int mann) {
-	for (List<Integer> paar : this.verlobung) {
-	    if (paar.get(0) == mann) {
+	for (Integer[] paar : this.verlobung) {
+	    if (paar[0] == mann) {
 		// Der Mann ist schon in einem Paar.
 		return false;
 	    }
@@ -59,8 +60,8 @@ public class Heirat {
 
     // Ist die Frau frei?
     boolean istFreiFrau(int frau) {
-	for (List<Integer> paar : this.verlobung) {
-	    if (paar.get(1) == frau) {
+	for (Integer[] paar : this.verlobung) {
+	    if (paar[1] == frau) {
 		// Die Frau ist schon in einem Paar.
 		return false;
 	    }
@@ -83,7 +84,7 @@ public class Heirat {
 		
 		// Er ist frei. Geh weiter.
 		// Frauen, die er vorliebt.
-		List<Integer> frauen = this.mannVorliebe.get(mann);
+		Integer[] frauen = this.mannVorliebe.get(mann);
 
 		if (this.vorschlaege.keySet().contains(mann)) {
 		    // Der Mann hat mindestens eine Frau schon
@@ -115,7 +116,7 @@ public class Heirat {
 	    if (this.istFreiMann(mann)) {
 		// Er ist frei. Geh weiter.		
 		// Frauen, die er vorliebt.
-		List<Integer> frauen = this.mannVorliebe.get(mann);
+		Integer[] frauen = this.mannVorliebe.get(mann);
 		// Frauen, die er vorgeschlagen hat.
 		Set<Integer> mannVorschlaege = this.vorschlaege.get(mann);
 	    
@@ -138,7 +139,7 @@ public class Heirat {
     int nehmeBeliebteste(int mann) {
 	
 	// Frauen, die er vorliebt.
-	List<Integer> frauen = this.mannVorliebe.get(mann);
+	Integer[] frauen = this.mannVorliebe.get(mann);
 	// Frauen, die er vorgeschlagen hat.
 	Set<Integer> mannVorschlaege = this.vorschlaege.get(mann);
 
@@ -157,10 +158,10 @@ public class Heirat {
     // Nehme an, daß die Frau schon in einem Paar steht.
     // Nehme den Mann, mit ihm die Frau steht.
     int nehmeMannVonFrau(int frau) {
-	for (List<Integer> paar : this.verlobung) {
-	    if (paar.get(1) == frau) {
+	for (Integer[] paar : this.verlobung) {
+	    if (paar[1] == frau) {
 		// Gebe den Mann von der Frau.
-		return paar.get(0);
+		return paar[0];
 	    }
 	}
 
@@ -171,9 +172,11 @@ public class Heirat {
     // Liebt die Frau den Mann meins mehr als mzwei vor?
     boolean stehtHoeher(int frau, int meins, int mzwei) {
 	// Die Stelle, an der der Mann meins steht.
-	int meinsStelle = this.frauVorliebe.get(frau).indexOf(meins);
+	int meinsStelle = Liste.index(this.frauVorliebe.get(frau), meins);
 	// Die Stelle, an der der Mann mzwei steht.
-	int mzweiStelle = this.frauVorliebe.get(frau).indexOf(mzwei);
+	int mzweiStelle = Liste.index(this.frauVorliebe.get(frau), mzwei);
+
+	System.out.println("m1, m2: " + meinsStelle + " " + mzweiStelle);
 	
 	return meinsStelle < mzweiStelle;    
     }
@@ -182,14 +185,14 @@ public class Heirat {
     // frei, und setzen ein neues Paar mit dem neuen Mann ein.
     private void tauschen(int frau, int neuerMann) {
 	for (int i = 0; i < this.verlobung.size(); i++) {
-	    List<Integer> paar = this.verlobung.get(i);
-	    if (paar.get(1) == frau) {
-		this.verlobung.set(i, Arrays.asList(neuerMann, frau));
+	    Integer[] paar = this.verlobung.get(i);
+	    if (paar[1] == frau) {
+		this.verlobung.set(i, new Integer[] {neuerMann, frau});
 	    }
 	}
     }
 
-    public List<List<Integer>> schritt() {
+    public ArrayList<Integer[]> schritt() {
 
 	if (this.nichtAlleVorgeschlagen()) {
 
@@ -200,7 +203,7 @@ public class Heirat {
 	    if (this.istFreiFrau(frau)) {
 		// Die Frau ist frei. Mache ein Paar.
 		System.out.println("Die Frau " + frau + " ist frei.");
-		this.verlobung.add(Arrays.asList(mann, frau));
+		this.verlobung.add(new Integer[] {mann, frau});
 		
 	    } else {
 		System.out.println("Die Frau " + frau + " ist nicht frei.");
@@ -221,7 +224,6 @@ public class Heirat {
 	    // Addiere sie zu die Frauen, die er schon vorgeschlagen hat.
 	    this.vorschlaege.get(mann).add(frau);
 
-	    System.out.println("Verlobung ist " + this.verlobung);
 	    System.out.println("Vorschlag fertig. Vorschlag ist " + vorschlaege);
 	}
 	

@@ -1,6 +1,6 @@
-# match
+# bipartite
 
-Matching algorithms.
+Bipartite matching algorithms.
 
 ## gale-shapely
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
+	
 	// Es gibt 3 Männer: 0,1,2
 	// 0 liebt vor: 3,5,4
 	// 1 liebt vor: 3,4,5
@@ -32,7 +32,7 @@ public class Main {
 	Heirat h = new Heirat(mannVorliebe, frauVorliebe);
 
 	while (h.nichtAlleVorgeschlagen()) {
-	    List<List<Integer>> verlobung = h.match();
+	    List<List<Integer>> verlobung = h.schritt();
 	    System.out.println(verlobung);
 	}
     }

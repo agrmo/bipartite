@@ -24,6 +24,7 @@ import java.util.Set;
 
 public class Heirat {
     
+    public int groesse;
     public HashMap<Integer,List<Integer>> mannVorliebe;
     public HashMap<Integer,List<Integer>> frauVorliebe;
     public HashMap<Integer,HashSet<Integer>> vorschlaege;
@@ -32,6 +33,11 @@ public class Heirat {
     public Heirat(HashMap<Integer,List<Integer>> m,
 		  HashMap<Integer,List<Integer>> f) {
 
+	if (m.size() != f.size()) {
+	    System.out.println("Problem");
+	}
+	
+	this.groesse = m.size();
 	this.mannVorliebe = m;
 	this.frauVorliebe = f;
 	this.verlobung = new ArrayList<List<Integer>>();
@@ -148,10 +154,10 @@ public class Heirat {
 	return 0;
     }
 
-    // Nehme an, dass die Frau schon in einem Paar steht.
+    // Nehme an, daß die Frau schon in einem Paar steht.
     // Nehme den Mann, mit ihm die Frau steht.
     int nehmeMannVonFrau(int frau) {
-	for (List<Integer> paar : verlobung) {
+	for (List<Integer> paar : this.verlobung) {
 	    if (paar.get(1) == frau) {
 		// Gebe den Mann von der Frau.
 		return paar.get(0);
@@ -162,7 +168,7 @@ public class Heirat {
 	return 0;
     }
 
-    // Liebt die Frau den Mann m1 mehr als m2 vor?
+    // Liebt die Frau den Mann meins mehr als mzwei vor?
     boolean stehtHoeher(int frau, int meins, int mzwei) {
 	// Die Stelle, an der der Mann meins steht.
 	int meinsStelle = this.frauVorliebe.get(frau).indexOf(meins);
@@ -183,7 +189,7 @@ public class Heirat {
 	}
     }
 
-    public List<List<Integer>> match() {
+    public List<List<Integer>> schritt() {
 
 	if (this.nichtAlleVorgeschlagen()) {
 
@@ -194,7 +200,7 @@ public class Heirat {
 	    if (this.istFreiFrau(frau)) {
 		// Die Frau ist frei. Mache ein Paar.
 		System.out.println("Die Frau " + frau + " ist frei.");
-		verlobung.add(Arrays.asList(mann, frau));
+		this.verlobung.add(Arrays.asList(mann, frau));
 		
 	    } else {
 		System.out.println("Die Frau " + frau + " ist nicht frei.");
@@ -215,10 +221,10 @@ public class Heirat {
 	    // Addiere sie zu die Frauen, die er schon vorgeschlagen hat.
 	    this.vorschlaege.get(mann).add(frau);
 
-	    System.out.println("Verlobung ist " + verlobung);
+	    System.out.println("Verlobung ist " + this.verlobung);
 	    System.out.println("Vorschlag fertig. Vorschlag ist " + vorschlaege);
 	}
 	
-	return verlobung;
+	return this.verlobung;
     }
 }
